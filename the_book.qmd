@@ -26,7 +26,48 @@ You can add options to executable code like this
 
 The `echo: false` option disables the printing of code (only output is displayed).
 
-<font size="18"> **The Book** <font>
+<h1 style="text-align: center; font-size:25pt">**The Book**</h1>
+<h4 style="text-align: center; font-size:11pt">*By Sam Assaf*</h4>
 
-* still need to center this
 
+# Outline {-}
+
+- [Abstract & Example : Analysts & Coaches](#abstract-example-:-analysts-&-coaches)
+- [Introduction : Analysts & Coaches](#introduction-:-analysts-&-coaches)
+- [Problem Framing : Analysts](#problem-framing-:-analysts)
+- [Related works : Analysts](#related-works-:-analysts)
+- [Data Overview : Analysts](#data-overview-:-analysts)
+  - [Variables in Model : Analysts & Coaches](#variables-in-model-:-analysts-&-coaches)
+  - [Data Visualization : Analysts & Coaches](#data-visualization-:-analysts-&-coaches)
+- [Methods : Analysts](#methods-:-analysts)
+  - [Model Adjustments : Analysts & Coaches](#model-adjustments-:-analysts-&-coaches)
+- [Discussion : Analysts & Coaches](#discussion-:-analysts-&-coaches)
+- [Examples Plots / Situation : Analysts & Coaches](#examples-plots-/-situation-:-analysts-&-coaches)
+- [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work-:-analysts-&-coaches)
+
+# Abstract & Example : Analysts & Coaches {-}
+
+![Page of *The Book* according to the game siutation](~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png)
+
+
+# Introduction : Analysts & Coaches {-}
+
+# Problem Framing : Analysts {-}
+
+# Related works : Analysts {-}
+
+# Data Overview : Analysts {-}
+
+## Variables in Model : Analysts & Coaches {-}
+
+## Data Visualization : Analysts & Coaches {-}
+
+# Methods : Analysts {-}
+
+## Model Adjustments : Analysts & Coaches {-}
+
+# Discussion : Analysts & Coaches {-}
+
+# Examples Plots / Situation : Analysts & Coaches {-}
+
+# Conclusion and Future Work : Analysts & Coaches {-}
