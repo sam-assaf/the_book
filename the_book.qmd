@@ -12,66 +12,121 @@ format:
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
 
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this 
-
-```{r}
-#| echo: false
-2 * 2
-
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
-
 <h1 style="text-align: center; font-size:25pt">**The Book**</h1>
 <h4 style="text-align: center; font-size:11pt">*By Sam Assaf*</h4>
 
 
 # Outline {-}
 
-- [Abstract & Example : Analysts & Coaches](#abstract-example-:-analysts-&-coaches)
-- [Introduction : Analysts & Coaches](#introduction-:-analysts-&-coaches)
-- [Problem Framing : Analysts](#problem-framing-:-analysts)
-- [Related works : Analysts](#related-works-:-analysts)
-- [Data Overview : Analysts](#data-overview-:-analysts)
-  - [Variables in Model : Analysts & Coaches](#variables-in-model-:-analysts-&-coaches)
-  - [Data Visualization : Analysts & Coaches](#data-visualization-:-analysts-&-coaches)
+- [Abstract & Example : Analysts & Coaches](#abstract-example--analysts--coaches)
+- [Introduction : Analysts & Coaches](#introduction--analysts--coaches)
+- [Problem Framing : Analysts](#problem-framing--analysts)
+- [Related works : Analysts](#related-works--analysts)
+- [Data Overview : Analysts](#data-overview--analysts)
+  - [Variables in Model : Analysts & Coaches](#variables-in-model--analysts--coaches)
+  - [Data Visualization : Analysts & Coaches](#data-visualization--analysts--coaches)
 - [Methods : Analysts](#methods-:-analysts)
-  - [Model Adjustments : Analysts & Coaches](#model-adjustments-:-analysts-&-coaches)
-- [Discussion : Analysts & Coaches](#discussion-:-analysts-&-coaches)
-- [Examples Plots / Situation : Analysts & Coaches](#examples-plots-/-situation-:-analysts-&-coaches)
-- [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work-:-analysts-&-coaches)
+  - [Model Adjustments : Analysts & Coaches](#model-adjustments--analysts--coaches)
+    - [Model Without Risk Aversion Adjustments : Analysts & Coaches](#model-without-risk-aversion-adjustments--analysts--coaches)
+    - [Model With Risk Aversion Adjustments : Analysts & Coaches](#model-with-risk-aversion-adjustments--analysts--coaches)
+- [Discussion : Analysts & Coaches](#discussion--analysts--coaches)
+- [Examples Plots / Situation : Analysts & Coaches](#examples-plots--situation--analysts--coaches)
+- [Conclusion and Future Work : Analysts & Coaches](#conclusion-and-future-work--analysts--coaches)
 
-# Abstract & Example : Analysts & Coaches {-}
+# Abstract & Example : Analysts & Coaches {#abstract-example--analysts--coaches}
 
-![Page of *The Book* according to the game siutation](~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png)
+```{r example book page, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics("~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 7 - 4 minutes left : Losing by 3 to tied.png")
+```
 
 
-# Introduction : Analysts & Coaches {-}
+```{r historical play sit, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/play_type_by_situation.png')
+```
 
-# Problem Framing : Analysts {-}
+# Introduction : Analysts & Coaches {#introduction--analysts--coaches}
 
-# Related works : Analysts {-}
+# Problem Framing : Analysts {#problem-framing--analysts}
 
-# Data Overview : Analysts {-}
+# Related works : Analysts {#related-works--analysts}
 
-## Variables in Model : Analysts & Coaches {-}
+# Data Overview : Analysts {#data-overview--analysts}
 
-## Data Visualization : Analysts & Coaches {-}
+```{r continous vs binned yard line, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_by_yardline_and_yardline_cat.png')
+```
 
-# Methods : Analysts {-}
+## Variables in Model : Analysts & Coaches {#variables-in-model--analysts--coaches}
 
-## Model Adjustments : Analysts & Coaches {-}
++------------------------+---------------------------------+----------------------------------+
+| Outcome Variable       | Game Data                       | Play Data                        |
++========================+=================================+==================================+
+| Win Probability Added  | - Stadium                       | - Play type (input)              |
+| (WPA)                  | - Roof                          | - Field goal probability         |
+|                        | - Surface                       | - Yards to go (first down or     |
+|                        | - Temperature                   |   score)                         |
+|                        | - Wind                          | - Yardline (continuous and       |
+|                        | - Weather detail                |   binned)[^3]                    |
+|                        |                                 | - EPAs[^4]                       |
+|                        |                                 | - ELOs[^5]                       |
+|                        |                                 | - Score differential (binned)[^6]|
+|                        |                                 | - Game time remaining (binned)[^7]|
+|                        |                                 | - Score difference time ratio[^8]|
++------------------------+---------------------------------+----------------------------------+
 
-# Discussion : Analysts & Coaches {-}
+[^3]: Quantitative : 1 - 60 & Categorical / Bins : [1, 5], [6, 15], [16, 25], [26, 38], [39 to 45], [46, 60]
+[^4]: Expected Points Added (EPAs) are a measure of the expected point value at the start of a play. Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game.
+[^5]: ELO ratings are used to rank teams and specific features of a team based on their performance. Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game
+[^6]: Categorical / Bins : (-∞,17], [-16,-9], [-8,-4], [-3,0], [1,3], [4, 8], [9, 16], [17,∞)
+[^7]: Categorical / Bins : First Quarter : [15,0], Second Quarter : [15,4), [4, 2), [2,0], Third Quarter: [15,0], Fourth Quarter : [15, 7), [7, 4), [4, 2), [2, 0]
+[^8]: Score difference time ratio is addressing the relationship between score differential and time remaining. The average time remaining for each bin of time remaining and most frequently occurring score differential for each bin to calculate this measure
 
-# Examples Plots / Situation : Analysts & Coaches {-}
 
-# Conclusion and Future Work : Analysts & Coaches {-}
+
+
+## Data Visualization : Analysts & Coaches {#data-visualization--analysts--coaches}
+
+```{r WPA by play type and time remaining, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/wpa_violin_by_play_type_game_time_cat.png')
+```
+
+
+
+```{r ELO and EPA, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/offense_run_elo_pre_game_pos_vs_run_epa_cumulative_lagged_1_week.png')
+```
+
+
+# Methods : Analysts {#methods-:-analysts}
+
+
+```{r SHAP, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Visualizations/best_final_4th_05_shap_plot.png')
+```
+
+
+```{r fg cutoff, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Model v0/Plots for Write Up/fg_plot_holder.png')
+```
+
+## Model Adjustments : Analysts & Coaches {#model-adjustments--analysts--coaches}
+
+### Model Without Risk Aversion Adjustments : Analysts & Coaches {#model-without-risk-aversion-adjustments--analysts--coaches}
+
+```{r Model Without Risk Aversion Adjustments, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go No Adj/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+```
+
+
+### Model With Risk Aversion Adjustments : Analysts & Coaches {#model-with-risk-aversion-adjustments--analysts--coaches}
+
+```{r Model With Risk Aversion Adjustments, echo = FALSE, fig.cap="FILL IN CAPTION HERE.", dpi=300}
+knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission/Game Prediction/Tile Visualizations 05 Yardline Cat Binary Play Type Diff Go or Not Go/4th Quarter : 15 - 7 minutes left : Losing by 8 to 4.png')
+```
+
+
+# Discussion : Analysts & Coaches {#discussion--analysts--coaches}
+
+# Examples Plots / Situation : Analysts & Coaches {#examples-plots--situation--analysts--coaches}
+
+# Conclusion and Future Work : Analysts & Coaches {#conclusion-and-future-work--analysts--coaches}
