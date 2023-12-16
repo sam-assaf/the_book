@@ -8,6 +8,60 @@ format:
     self-contained: true
 ---
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(gt)
+library(tidyverse) 
+library(rvest)
+library(robotstxt)
+library(dplyr)
+library(vtable)
+library(gtsummary)
+library(gmodels)
+library(sjPlot)
+library(xtable)
+library(psych)
+library(car)
+library(olsrr)
+library(ggrepel)
+library(nflreadr)
+library(nflplotR)
+library(Dict)
+library(stargazer)
+library(xgboost)
+library(fastDummies)
+library(GPArotation)
+library(httr)
+library(jsonlite)
+library(lubridate)
+library(tidyverse)
+library(DT)
+library(glue)
+library(xgboostExplainer)
+library(pROC)
+library(SHAPforxgboost)
+library(data.table)
+library(caret)
+library(shapviz)
+library(DALEX)
+library(readxl)
+library(ggdark) # Load ggdark
+library(RCurl) # Load RCurl
+library(grid) # Load grid
+library(jpeg) # Load jpeg
+library(gganimate) # Load gganimate
+library(transformr)
+library(ggridges) # Load ggridges
+library(png)
+library(ggimage)
+library(foreach)
+library(doParallel)
+library(magick)
+library(DT)
+library(reshape2)
+library(htmltools)
+```
+
+
 ## Quarto
 
 Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
@@ -58,21 +112,64 @@ knitr::include_graphics('~/Desktop/MSBA-SA/The Book Project v_3/Final Submission
 
 ## Variables in Model : Analysts & Coaches {#variables-in-model--analysts--coaches}
 
-+------------------------+---------------------------------+----------------------------------+
-| Outcome Variable       | Game Data                       | Play Data                        |
-+========================+=================================+==================================+
-| Win Probability Added  | - Stadium                       | - Play type (input)              |
-| (WPA)                  | - Roof                          | - Field goal probability         |
-|                        | - Surface                       | - Yards to go (first down or     |
-|                        | - Temperature                   |   score)                         |
-|                        | - Wind                          | - Yardline (continuous and       |
-|                        | - Weather detail                |   binned)[^3]                    |
-|                        |                                 | - EPAs[^4]                       |
-|                        |                                 | - ELOs[^5]                       |
-|                        |                                 | - Score differential (binned)[^6]|
-|                        |                                 | - Game time remaining (binned)[^7]|
-|                        |                                 | - Score difference time ratio[^8]|
-+------------------------+---------------------------------+----------------------------------+
+
+
+```{r variable table}
+# Create vectors for each category of information
+OutcomeVariable <- c("Win Probability Added (WPA)", '', '', '', '', '', '', '', '')
+GameData <- c("Stadium", "Roof", "Surface", "Temperature", "Wind", "Weather detail", '', '', '')
+PlayData <- c("Play type (input)", "Field goal probability", "Yards to go (first down or score)", 
+              "Yardline (continuous and binned)³", "EPAs⁴", "ELOs⁵", "Score differential (binned)⁶", 
+              "Game time remaining (binned)⁷", "Score difference time ratio⁸")
+
+# Combine into a data frame
+df <- data.frame(OutcomeVariable, GameData, PlayData, stringsAsFactors = FALSE)
+
+# Create the gt table
+gt_table <- df %>%
+  gt() %>%
+  cols_label(
+    OutcomeVariable = "Outcome Variable",
+    GameData = "Game Data",
+    PlayData = "Play Data")
+
+# Print the gt table
+print(gt_table)
+```
+
+
+```{r}
+# Define the data in a tibble (from the dplyr package)
+df <- tibble::tibble(
+  Category = c("Outcome Variable", "Game Data", "Play Data"),
+  Description = c(
+    "Win Probability Added (WPA)", 
+    paste(c("Stadium", "Roof", "Surface", "Temperature", "Wind", "Weather detail"), collapse = "; "),
+    paste(c("Play type (input)", "Field goal probability", "Yards to go (first down or score)", 
+            "Yardline (continuous and binned)[^3]", "EPAs[^4]", "ELOs[^5]", "Score differential (binned)[^6]", 
+            "Game time remaining (binned)[^7]", "Score difference time ratio[^8]"), collapse = "; ")
+  )
+)
+
+# Create the gt table
+gt_table <- df %>%
+  gt() %>%
+  cols_label(Category = "") %>%  # remove the column name for Category
+  fmt_markdown(columns = vars(Description)) %>%  # this will interpret the Markdown syntax in the Description column
+  tab_options(
+    column_labels.font.size = pct(80),
+    heading.title.font.size = pct(150),
+    heading.subtitle.font.size = pct(125)
+  ) %>%
+  tab_header(
+    title = "NFL Data Categories",
+    subtitle = "This table categorizes different types of NFL data."
+  )
+
+# Print the gt table
+gt_table
+```
+
 
 [^3]: Quantitative : 1 - 60 & Categorical / Bins : [1, 5], [6, 15], [16, 25], [26, 38], [39 to 45], [46, 60]
 [^4]: Expected Points Added (EPAs) are a measure of the expected point value at the start of a play. Various aggregated and lagged measures - for both teams, offensive pass & run game, defensive pass & run game.
